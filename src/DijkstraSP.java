@@ -1,12 +1,13 @@
 import java.util.*;
 
-public class DijkstraSP {
-    private static Map<String, MPD> map = new TreeMap<String, MPD>();
-    List<String> nodesToVisit = new ArrayList<>();
-    List<String> path = new ArrayList<>();
-    List<DirectedEdge> Edges = new ArrayList<>();
+public class DijkstraSP<V extends Comparable<V>> {
+    /**/
+    private Map<V, MPD> map = new TreeMap<>();
+    private List<V> nodesToVisit = new ArrayList<>();
+    private List<V> path = new ArrayList<>();
+    private List<DirectedEdge<V>> Edges = new ArrayList<>();
 
-    public List<String> DijkstraSP(WDigraph<String> wDigraph, String s) {
+    public List<V> DijkstraSP(WDigraph<V> wDigraph, V s) {
         map.put(s, new MPD(false, "-1", 0.0));
         nodesToVisit.add(s);
 
@@ -14,17 +15,17 @@ public class DijkstraSP {
             System.out.println("canceled because there are negative edge weight");
             return path;
         }
-        for (String key : wDigraph.adjacencyList.keySet()) {
-            ArrayList<DirectedEdge<String>> nodeAndEdges = wDigraph.adjacencyList.get(key);
-            for (DirectedEdge<String> directedEdge : nodeAndEdges) {
-                if (!s.toString().equals(directedEdge.from())) {
+        for (V key : wDigraph.adjacencyList.keySet()) {
+            ArrayList<DirectedEdge<V>> nodeAndEdges = wDigraph.adjacencyList.get(key);
+            for (DirectedEdge<V> directedEdge : nodeAndEdges) {
+                if (!s.equals(directedEdge.from())) {
                     map.put(key, new MPD(false, "-1", Double.POSITIVE_INFINITY));
                 }
             }
         }
         while (!nodesToVisit.isEmpty()) {
             double minimalDistance = Double.POSITIVE_INFINITY;
-            String currentNode = s;
+            V currentNode = s;
 
             for(int i = 0; i<nodesToVisit.size(); i++) {
                 if(map.get(nodesToVisit.get(i)).distance < minimalDistance) {
@@ -37,11 +38,11 @@ public class DijkstraSP {
             map.get(currentNode).marked = true;
             path.add(currentNode);
 
-            for(DirectedEdge<String> directedEdge : wDigraph.adjacencyList.get(currentNode)) {
+            for(DirectedEdge<V> directedEdge : wDigraph.adjacencyList.get(currentNode)) {
                 Edges.add(directedEdge);
             }
 
-            for(DirectedEdge<String> edge: Edges) {
+            for(DirectedEdge<V> edge: Edges) {
                 if(map.get(edge.to()).distance > map.get(edge.from()).distance + edge.weight()) {
                     map.get(edge.to()).distance = map.get(edge.from()).distance + edge.weight();
                     map.get(edge.to()).previous = edge.from();
@@ -55,16 +56,16 @@ public class DijkstraSP {
         return path;
     }
 
-    public static void shortestPath(String s, String d) {
+    public void shortestPath(V s, V d) {
         if(hasPathTo(d)) {
             if (s.equals(d)) {
                 System.out.println("The destination is the starting node");
             } else {
                 String path = "";
-                String currentNode = d;
+                V currentNode = d;
                 while(!currentNode.equals(s) && currentNode != "-1") {
                     path = currentNode + " " + path;
-                    currentNode = map.get(currentNode).previous;
+                    currentNode = (V) map.get(currentNode).previous;
                 }
                 path = s + " " + path;
                 if(currentNode == "-1") {
@@ -78,16 +79,16 @@ public class DijkstraSP {
         }
     }
 
-    public static boolean hasPathTo(String v) {
+    public boolean hasPathTo(V v) {
         return map.get(v).marked;
     }
 
-    public boolean verifyNonNegative(WDigraph<String> wDigraph) {
+    public boolean verifyNonNegative(WDigraph<V> wDigraph) {
         boolean negativeEdgeWeight = false;
-        Set<String> keys = wDigraph.adjacencyList.keySet();
-        for (String key : keys) {
-            ArrayList<DirectedEdge<String>> nodeAndEdges = wDigraph.adjacencyList.get(key);
-            for (DirectedEdge<String> edge : nodeAndEdges) {
+        Set<V> keys = wDigraph.adjacencyList.keySet();
+        for (V key : keys) {
+            ArrayList<DirectedEdge<V>> nodeAndEdges = wDigraph.adjacencyList.get(key);
+            for (DirectedEdge<V> edge : nodeAndEdges) {
                 if (edge.weight() < 0) {
                     negativeEdgeWeight = true;
                 }
