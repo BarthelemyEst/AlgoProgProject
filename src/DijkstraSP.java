@@ -1,13 +1,14 @@
 import java.util.*;
 
 public class DijkstraSP<V extends Comparable<V>> {
-    /**/
-    private Map<V, MPD> map = new TreeMap<>();
+    private Map<V, MPD<V>> map = new TreeMap();
     private List<V> nodesToVisit = new ArrayList<>();
     private List<V> path = new ArrayList<>();
     private List<DirectedEdge<V>> Edges = new ArrayList<>();
+    V start;
 
     public List<V> DijkstraSP(WDigraph<V> wDigraph, V s) {
+        this.start = s;
         map.put(s, new MPD(false, "-1", 0.0));
         nodesToVisit.add(s);
 
@@ -56,31 +57,35 @@ public class DijkstraSP<V extends Comparable<V>> {
         return path;
     }
 
-    public void shortestPath(V s, V d) {
+    public void shortestPath(V d) {
         if(hasPathTo(d)) {
-            if (s.equals(d)) {
+            if (this.start.equals(d)) {
                 System.out.println("The destination is the starting node");
             } else {
                 String path = "";
                 V currentNode = d;
-                while(!currentNode.equals(s) && currentNode != "-1") {
+                while(!currentNode.equals(this.start) && currentNode != "-1") {
                     path = currentNode + " " + path;
                     currentNode = (V) map.get(currentNode).previous;
                 }
-                path = s + " " + path;
+                path = this.start + " " + path;
                 if(currentNode == "-1") {
-                    System.out.println("there is no path between " + s + " and " + d);
+                    System.out.println("there is no path between " + this.start + " and " + d);
                 } else {
                     System.out.println("the path is : " + path);
                 }
             }
         } else {
-            System.out.println("there is no path between " + s + " and " + d);
+            System.out.println("there is no path between " + this.start + " and " + d);
         }
     }
 
     public boolean hasPathTo(V v) {
-        return map.get(v).marked;
+        return map.get(v.toString()).marked;
+    }
+
+    public void distTo(V d) {
+        System.out.println(map.get(d.toString()).distance);
     }
 
     public boolean verifyNonNegative(WDigraph<V> wDigraph) {

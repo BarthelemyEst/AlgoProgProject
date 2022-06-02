@@ -3,7 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GraphFactory<V extends Comparable<V>> {
-    public Digraph<V> createDiGraphFromTextFile(String path) throws FileNotFoundException {
+
+    public static <V extends Comparable<V>> Digraph<V> createDiGraphFromTextFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner sc = new Scanner(file);
         Digraph<V> graph = new Digraph<>();
@@ -17,7 +18,7 @@ public class GraphFactory<V extends Comparable<V>> {
         return graph;
     }
 
-    public WDigraph<V> createWDiGraphFromTextFile(String path) throws FileNotFoundException {
+    public static <V extends Comparable<V>> WDigraph<V> createWDiGraphFromTextFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner sc = new Scanner(file);
         WDigraph<V> graph = new WDigraph<>();
@@ -31,6 +32,6 @@ public class GraphFactory<V extends Comparable<V>> {
         return graph;
     }
 
-    public GraphFactory() {
+    public GraphFactory(V type) {
     }
 }
