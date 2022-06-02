@@ -9,7 +9,7 @@ public class Digraph<V extends Comparable<V>> extends Graph<V, Edge<V>> {
 		if (this.adjacencyList.get(edge.from()) == null) {
 		    this.adjacencyList.put(edge.from(), new ArrayList<>());
 		}
-		boolean add = this.adjacencyList.get(edge.from()).add(edge);
+		this.adjacencyList.get(edge.from()).add(edge);
 	}
 
 	public Digraph() {
