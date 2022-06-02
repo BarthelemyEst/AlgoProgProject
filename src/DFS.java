@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class DFS<V extends Comparable<V>> {
 
 	List<V> dfsWD(WDigraph<V> g, V startNode) {
-		List<V> dfsNodesList = new ArrayList<V>();
+		List<V> dfsNodesList = new ArrayList<>();
 		dFSRecursion2(g, startNode, dfsNodesList);
 		return dfsNodesList;
 	}

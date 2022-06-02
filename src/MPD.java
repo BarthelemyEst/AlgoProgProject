@@ -1,9 +1,9 @@
-public class MPD {
+public class MPD<V> {
     public boolean marked;
-    public String previous;
+    public V previous;
     public double distance;
 
-    public MPD(boolean marked, String previous, double distance) {
+    public MPD(boolean marked, V previous, double distance) {
         this.marked = marked;
         this.previous = previous;
         this.distance = distance;
