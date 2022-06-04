@@ -1,5 +1,6 @@
 import Algorithm.*;
 
+import Edge.DirectedEdge;
 import Graph.*;
 
 import java.io.FileNotFoundException;
@@ -12,7 +13,7 @@ public class Main {
 
         GraphFactory<String> stringGraphFactory = new StringGraphFactory();
         DiGraph diGraphString = stringGraphFactory.createDiGraphFromTextFile("graph-DFS-BFS.txt");
-        WDiGraph wDiGraphString = stringGraphFactory.createWDiGraphFromTextFile("graph-WDG.txt");
+        WDiGraph wDiGraphString = stringGraphFactory.createWDiGraphFromTextFile("metro.txt");
         DijkstraSP<String> stringDijkstraSP = new DijkstraSP();
 
 
@@ -22,6 +23,7 @@ public class Main {
 
 
         stringDijkstraSP.DijkstraSP(wDiGraphString, "3");
+
         stringDijkstraSP.shortestPath("5");
         stringDijkstraSP.distTo("5");
 
@@ -50,7 +52,7 @@ public class Main {
 
         GraphFactory<Integer> integerGraphFactory = new IntegerGraphFactory();
         DiGraph diGraphInteger = integerGraphFactory.createDiGraphFromTextFile("graph-DFS-BFS.txt");
-        WDiGraph wDiGraphInteger = integerGraphFactory.createWDiGraphFromTextFile("graph-WDG.txt");
+        WDiGraph wDiGraphInteger = integerGraphFactory.createWDiGraphFromTextFile("metro.txt");
         DijkstraSP<Integer> integerDijkstraSP = new DijkstraSP<>();
 
         System.out.println();
