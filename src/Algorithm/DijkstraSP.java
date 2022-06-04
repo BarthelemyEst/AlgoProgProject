@@ -6,10 +6,10 @@ import Graph.WDiGraph;
 import java.util.*;
 
 public class DijkstraSP<V extends Comparable<V>>{
-    private Map<V, MPD<V>> map = new TreeMap();
-    private List<V> nodesToVisit = new ArrayList<>();
-    private List<V> path = new ArrayList<>();
-    private List<DirectedEdge<V>> Edges = new ArrayList<>();
+    public Map<V, MPD<V>> map = new TreeMap();
+    public List<V> nodesToVisit = new ArrayList<>();
+    public List<V> path = new ArrayList<>();
+    public List<DirectedEdge<V>> Edges = new ArrayList<>();
     V start;
 
     public List<V> DijkstraSP(WDiGraph<V, DirectedEdge<V>> wDiGraph, V s) {
@@ -17,8 +17,7 @@ public class DijkstraSP<V extends Comparable<V>>{
         map.put(s, new MPD(false, "-1", 0.0));
         nodesToVisit.add(s);
         if (verifyNonNegative(wDiGraph)) {
-            System.out.println("canceled because there are negative edge weight");
-            return path;
+            System.out.println("There are negative weights, it is possible that the results are false");
         }
         for (V key : wDiGraph.adjacencyList.keySet()) {
             ArrayList<DirectedEdge<V>> nodeAndEdges = wDiGraph.adjacencyList.get(key);
@@ -42,17 +41,15 @@ public class DijkstraSP<V extends Comparable<V>>{
             nodesToVisit.remove(currentNode);
             map.get(currentNode).marked = true;
             path.add(currentNode);
-
             for(DirectedEdge<V> directedEdge : wDiGraph.adjacencyList.get(currentNode)) {
                 Edges.add(directedEdge);
             }
 
             for(DirectedEdge<V> edge: Edges) {
-                if(map.get(edge.to()).distance > map.get(edge.from()).distance + edge.weight()) {
+                if(map.get(edge.to()).distance > map.get(edge.from()).distance + edge.weight()  && map.get(edge.to()).previous.equals("-1")) {
                     map.get(edge.to()).distance = map.get(edge.from()).distance + edge.weight();
                     map.get(edge.to()).previous = edge.from();
                 }
-
                 if(!map.get(edge.to()).marked && !nodesToVisit.contains(edge.to())) {
                     nodesToVisit.add(edge.to());
                 }

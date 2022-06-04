@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class IntegerGraphFactory extends GraphFactory<Integer>{
+public class IntegerGraphFactory extends GraphFactory<Integer> {
     @Override
     public <V extends Comparable<V>> DiGraph createDiGraphFromTextFile(String path) throws FileNotFoundException {
         File file = new File(path);
@@ -27,11 +27,16 @@ public class IntegerGraphFactory extends GraphFactory<Integer>{
         File file = new File(path);
         Scanner sc = new Scanner(file);
         WDiGraph<Integer, DirectedEdge<Integer>> graph = new WDiGraph<Integer, DirectedEdge<Integer>>();
+        boolean dollarPassed = false;
         while (sc.hasNextLine()) {
-            graph.m++;
             String[] currentLineNodes = sc.nextLine().split(" ");
-            DirectedEdge<Integer> newDirectedEdge = new DirectedEdge<>(Integer.valueOf(currentLineNodes[0]), Integer.valueOf(currentLineNodes[1]), Double.parseDouble(currentLineNodes[2]));
-            graph.addDirectedEdge(newDirectedEdge);
+            if (dollarPassed) {
+                graph.m++;
+                DirectedEdge<Integer> newDirectedEdge = new DirectedEdge<>(Integer.valueOf(currentLineNodes[0]), Integer.valueOf(currentLineNodes[1]), Double.parseDouble(currentLineNodes[2]));
+                graph.addDirectedEdge(newDirectedEdge);
+            } else if (currentLineNodes[0].equals("$")) {
+                dollarPassed = true;
+            }
         }
         sc.close();
         return graph;

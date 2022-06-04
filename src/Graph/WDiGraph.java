@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class WDiGraph<V, E extends DirectedEdge<V>> extends Graph<V, E> {
 
-
     public Map<V, ArrayList<E>> adjacencyList;
 
     public void addDirectedEdge(E directedEdge) {

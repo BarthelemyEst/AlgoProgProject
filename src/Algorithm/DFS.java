@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class DFS<V extends Comparable<V>, E> {
+public class DFS<V extends Comparable<V>> {
 
 	public List<V> dfsWD(WDiGraph<V, DirectedEdge<V>> g, V startNode) {
 		List<V> dfsNodesList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class DFS<V extends Comparable<V>, E> {
 	}
 
 	public List<V> dfs(DiGraph<V, Edge<V>> g, V startNode) {
-		List<V> dfsNodesList = new ArrayList<V>();
+		List<V> dfsNodesList = new ArrayList<>();
 		dFSRecursion(g, startNode, dfsNodesList);
 		return dfsNodesList;
 	}
