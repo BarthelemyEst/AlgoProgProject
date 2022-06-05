@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class StringGraphFactory extends GraphFactory<String> {
     @Override
-    public <V extends Comparable<V>> DiGraph createDiGraphFromTextFile(String path) throws FileNotFoundException {
+    public DiGraph createDiGraphFromTextFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner sc = new Scanner(file);
         DiGraph<String, Edge<String>> graph = new DiGraph<String, Edge<String>>();
@@ -23,7 +23,7 @@ public class StringGraphFactory extends GraphFactory<String> {
     }
 
     @Override
-    public <V extends Comparable<V>> WDiGraph createWDiGraphFromTextFile(String path) throws FileNotFoundException {
+    public WDiGraph createWDiGraphFromTextFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner sc = new Scanner(file);
         WDiGraph<String, DirectedEdge<String>> graph = new WDiGraph<String, DirectedEdge<String>>();
