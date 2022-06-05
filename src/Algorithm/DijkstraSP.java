@@ -5,7 +5,7 @@ import Graph.WDiGraph;
 
 import java.util.*;
 
-public class DijkstraSP<V extends Comparable<V>>{
+public class DijkstraSP<V extends Comparable<V>> {
     public Map<V, MPD<V>> map = new TreeMap();
     public List<V> nodesToVisit = new ArrayList<>();
     public List<V> path = new ArrayList<>();
@@ -30,27 +30,25 @@ public class DijkstraSP<V extends Comparable<V>>{
         while (!nodesToVisit.isEmpty()) {
             double minimalDistance = Double.POSITIVE_INFINITY;
             V currentNode = s;
-
-            for(int i = 0; i<nodesToVisit.size(); i++) {
-                if(map.get(nodesToVisit.get(i)).distance < minimalDistance) {
+            for (int i = 0; i < nodesToVisit.size(); i++) {
+                if (map.get(nodesToVisit.get(i)).distance < minimalDistance) {
                     minimalDistance = map.get(nodesToVisit.get(i)).distance;
                     currentNode = nodesToVisit.get(i);
                 }
             }
-
             nodesToVisit.remove(currentNode);
             map.get(currentNode).marked = true;
             path.add(currentNode);
-            for(DirectedEdge<V> directedEdge : wDiGraph.adjacencyList.get(currentNode)) {
+            for (DirectedEdge<V> directedEdge : wDiGraph.adjacencyList.get(currentNode)) {
                 Edges.add(directedEdge);
             }
 
-            for(DirectedEdge<V> edge: Edges) {
-                if(map.get(edge.to()).distance > map.get(edge.from()).distance + edge.weight()  && map.get(edge.to()).previous.equals("-1")) {
+            for (DirectedEdge<V> edge : Edges) {
+                if (map.get(edge.to()).distance > map.get(edge.from()).distance + edge.weight() && map.get(edge.to()).previous.equals("-1")) {
                     map.get(edge.to()).distance = map.get(edge.from()).distance + edge.weight();
                     map.get(edge.to()).previous = edge.from();
                 }
-                if(!map.get(edge.to()).marked && !nodesToVisit.contains(edge.to())) {
+                if (!map.get(edge.to()).marked && !nodesToVisit.contains(edge.to())) {
                     nodesToVisit.add(edge.to());
                 }
             }
@@ -59,22 +57,18 @@ public class DijkstraSP<V extends Comparable<V>>{
     }
 
     public void shortestPath(V d) {
-        if(hasPathTo(d)) {
+        if (hasPathTo(d)) {
             if (this.start.equals(d)) {
                 System.out.println("The destination is the starting node");
             } else {
                 String path = "";
                 V currentNode = d;
-                while(!currentNode.equals(this.start) && currentNode != "-1") {
+                while (!currentNode.equals(this.start)) {
                     path = currentNode + " " + path;
                     currentNode = map.get(currentNode).previous;
                 }
                 path = this.start + " " + path;
-                if(currentNode == "-1") {
-                    System.out.println("there is no path between " + this.start + " and " + d);
-                } else {
-                    System.out.println("the path is : " + path);
-                }
+                System.out.println("the path between " + this.start + " and " + d + " is : " + path);
             }
         } else {
             System.out.println("there is no path between " + this.start + " and " + d);
