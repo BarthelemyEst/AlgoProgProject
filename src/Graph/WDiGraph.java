@@ -20,8 +20,4 @@ public class WDiGraph<V, E extends DirectedEdge<V>> extends Graph<V, E> {
     public WDiGraph() {
         this.adjacencyList = new HashMap<>();
     }
-
-    public Map<V, ArrayList<E>> getAdjacencyList() {
-        return adjacencyList;
-    }
 }
