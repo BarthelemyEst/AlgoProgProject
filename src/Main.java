@@ -21,7 +21,6 @@ public class Main {
 
 
         stringDijkstraSP.DijkstraSP(wDiGraphString, "A");
-
         stringDijkstraSP.shortestPath("D");
         stringDijkstraSP.distTo("D");
 
@@ -29,8 +28,8 @@ public class Main {
         System.out.println("DFS : ");
 
 
-        System.out.println("DFS result from 0 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "A"));
-        System.out.println("DFS result from 5 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "F"));
+        System.out.println("DFS result from A (weighted graph) : " + dfs.dfsWD(wDiGraphString, "A"));
+        System.out.println("DFS result from F (weighted graph) : " + dfs.dfsWD(wDiGraphString, "F"));
         System.out.println("DFS result from 0 (unweighted graph) : " + dfs.dfs(diGraphString, "0"));
         System.out.println("DFS result from 5 (unweighted graph) : " + dfs.dfs(diGraphString, "5"));
 
@@ -49,14 +48,14 @@ public class Main {
 
         GraphFactory<Integer> integerGraphFactory = new IntegerGraphFactory();
         DiGraph diGraphInteger = integerGraphFactory.createDiGraphFromTextFile("graph-DFS-BFS.txt");
-        WDiGraph wDiGraphInteger = integerGraphFactory.createWDiGraphFromTextFile("metro.txt");
+        WDiGraph wDiGraphInteger = integerGraphFactory.createWDiGraphFromTextFile("graph-WDG.txt");
         DijkstraSP<Integer> integerDijkstraSP = new DijkstraSP<>();
 
         System.out.println();
         System.out.println("Dijkstra : ");
         System.out.println();
 
-        integerDijkstraSP.DijkstraSP(wDiGraphInteger, 3);
+        integerDijkstraSP.DijkstraSP(wDiGraphInteger, 1);
         integerDijkstraSP.shortestPath(5);
         integerDijkstraSP.distTo(5);
 
