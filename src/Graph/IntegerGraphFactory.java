@@ -32,6 +32,9 @@ public class IntegerGraphFactory extends GraphFactory<Integer> {
             String[] currentLineNodes = sc.nextLine().split(" ");
             if (dollarPassed) {
                 graph.m++;
+                if (!graph.adjacencyList.containsKey(Integer.valueOf(currentLineNodes[0]))) {
+                    graph.n++;
+                }
                 DirectedEdge<Integer> newDirectedEdge = new DirectedEdge<>(Integer.valueOf(currentLineNodes[0]), Integer.valueOf(currentLineNodes[1]), Double.parseDouble(currentLineNodes[2]));
                 graph.addDirectedEdge(newDirectedEdge);
             } else if (currentLineNodes[0].equals("$")) {

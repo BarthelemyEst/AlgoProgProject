@@ -32,6 +32,9 @@ public class StringGraphFactory extends GraphFactory<String> {
             String[] currentLineNodes = sc.nextLine().split(" ");
             if (dollarPassed) {
                 graph.m++;
+                if (!graph.adjacencyList.containsKey(currentLineNodes[0])) {
+                    graph.n++;
+                }
                 DirectedEdge<String> newDirectedEdge = new DirectedEdge<>(currentLineNodes[0], (currentLineNodes[1]), Double.parseDouble(currentLineNodes[2]));
                 graph.addDirectedEdge(newDirectedEdge);
             } else if (currentLineNodes[0].equals("$")) {

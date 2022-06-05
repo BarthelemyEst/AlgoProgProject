@@ -1,6 +1,4 @@
 import Algorithm.*;
-
-import Edge.DirectedEdge;
 import Graph.*;
 
 import java.io.FileNotFoundException;
@@ -13,7 +11,7 @@ public class Main {
 
         GraphFactory<String> stringGraphFactory = new StringGraphFactory();
         DiGraph diGraphString = stringGraphFactory.createDiGraphFromTextFile("graph-DFS-BFS.txt");
-        WDiGraph wDiGraphString = stringGraphFactory.createWDiGraphFromTextFile("metro.txt");
+        WDiGraph wDiGraphString = stringGraphFactory.createWDiGraphFromTextFile("WDG-Letters.txt");
         DijkstraSP<String> stringDijkstraSP = new DijkstraSP();
 
 
@@ -22,18 +20,17 @@ public class Main {
         System.out.println();
 
 
-        stringDijkstraSP.DijkstraSP(wDiGraphString, "3");
+        stringDijkstraSP.DijkstraSP(wDiGraphString, "A");
 
-        stringDijkstraSP.shortestPath("5");
-        stringDijkstraSP.distTo("5");
-
+        stringDijkstraSP.shortestPath("D");
+        stringDijkstraSP.distTo("D");
 
         System.out.println();
         System.out.println("DFS : ");
 
 
-        System.out.println("DFS result from 0 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "0"));
-        System.out.println("DFS result from 5 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "5"));
+        System.out.println("DFS result from 0 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "A"));
+        System.out.println("DFS result from 5 (weighted graph) : " + dfs.dfsWD(wDiGraphString, "F"));
         System.out.println("DFS result from 0 (unweighted graph) : " + dfs.dfs(diGraphString, "0"));
         System.out.println("DFS result from 5 (unweighted graph) : " + dfs.dfs(diGraphString, "5"));
 
