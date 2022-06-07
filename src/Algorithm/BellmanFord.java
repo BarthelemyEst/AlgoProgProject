@@ -15,6 +15,7 @@ public class BellmanFord<V extends Comparable<V>, E> {
     public V startingNode;
 
     public BellmanFord(WDiGraph<V, DirectedEdge<V>> G, V source) {
+        this.startingNode = source;
         map.put(source, new MPD(false, "-1", 0.0));
         nodesToVisit.add(source);
         ArrayList<DirectedEdge<V>> edges = new ArrayList<>();

@@ -26,17 +26,17 @@ public class Main {
         System.out.println();
 
         Long starttime = System.nanoTime();
-        stringDijkstraSP.DijkstraSP(wDiGraphString, "0");
-        stringDijkstraSP.shortestPath("5");
-        stringDijkstraSP.distTo("5");
+        stringDijkstraSP.DijkstraSP(wDiGraphString, "7");
+        stringDijkstraSP.shortestPath("1");
+        stringDijkstraSP.distTo("1");
         Long endtime = System.nanoTime();
         System.out.println("Dijkstra Execution Time : " + (endtime - starttime));
 
 
         starttime = System.nanoTime();
-        BellmanFord bellmanFord = new BellmanFord<>(wDiGraphString, "0");
+        BellmanFord bellmanFord = new BellmanFord<>(wDiGraphString, "7");
         System.out.println("BellmanFord : ");
-        bellmanFord.printSP("5");
+        bellmanFord.printSP("1");
         endtime = System.nanoTime();
         System.out.println("BellmanFord Execution Time : " + (endtime - starttime));
         System.out.println();
