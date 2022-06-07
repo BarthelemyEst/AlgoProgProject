@@ -7,10 +7,7 @@ import Edge.SortByDestinationEdge;
 import Graph.DiGraph;
 import Graph.WDiGraph;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class DFS<V extends Comparable<V>> {
 
@@ -34,12 +31,13 @@ public class DFS<V extends Comparable<V>> {
 	}
 
 	public List<V> dfsWD(WDiGraph<V, DirectedEdge<V>> g, V startNode) {
+		Map<V, MPD<V>> map = new HashMap<>();
 		List<V> dfsNodesList = new ArrayList<>();
-		dFSRecursion2(g, startNode, dfsNodesList);
+		dFSRecursion2(g, startNode, dfsNodesList, map);
 		return dfsNodesList;
 	}
 
-	public void dFSRecursion2(WDiGraph<V, DirectedEdge<V>> g, V currentNode, List<V> dfsNodesList) {
+	public void dFSRecursion2(WDiGraph<V, DirectedEdge<V>> g, V currentNode, List<V> dfsNodesList, Map<V, MPD<V>> map) {
 		dfsNodesList.add(currentNode);
 		if (!g.adjacencyList.get(currentNode).equals(null)) {
 			Collections.sort(g.adjacencyList.get(currentNode), new SortByDestinationDirectedEdge<V>());
@@ -47,7 +45,7 @@ public class DFS<V extends Comparable<V>> {
 			while (i.hasNext()) {
 				V nextNode = i.next().to();
 				if (!dfsNodesList.contains(nextNode))
-					dFSRecursion2(g, nextNode, dfsNodesList);
+					dFSRecursion2(g, nextNode, dfsNodesList, map);
 			}
 		}
 	}
