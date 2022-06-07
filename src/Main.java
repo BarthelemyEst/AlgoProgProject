@@ -26,17 +26,22 @@ public class Main {
         System.out.println();
 
         Long starttime = System.nanoTime();
-        stringDijkstraSP.DijkstraSP(wDiGraphString, "7");
-        stringDijkstraSP.shortestPath("1");
-        stringDijkstraSP.distTo("1");
+        stringDijkstraSP.DijkstraSP(wDiGraphString, "107");
+        stringDijkstraSP.shortestPath("7");
+        stringDijkstraSP.distTo("7");
         Long endtime = System.nanoTime();
         System.out.println("Dijkstra Execution Time : " + (endtime - starttime));
 
 
         starttime = System.nanoTime();
-        BellmanFord bellmanFord = new BellmanFord<>(wDiGraphString, "7");
+        BellmanFord bellmanFord = new BellmanFord<>(wDiGraphString, "107");
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
         System.out.println("BellmanFord : ");
-        bellmanFord.printSP("1");
+        bellmanFord.printSP("7");
         endtime = System.nanoTime();
         System.out.println("BellmanFord Execution Time : " + (endtime - starttime));
         System.out.println();
@@ -78,6 +83,16 @@ public class Main {
         integerDijkstraSP.DijkstraSP(wDiGraphInteger, 7);
         integerDijkstraSP.shortestPath(1);
         integerDijkstraSP.distTo(1);
+
+
+        BellmanFord bellmanFord1 = new BellmanFord<>(wDiGraphInteger, 7);
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("BellmanFord : ");
+        bellmanFord1.printSP(21);
 
         System.out.println();
         System.out.println("DFS : ");

@@ -52,6 +52,7 @@ public class BellmanFord<V extends Comparable<V>, E> {
             System.out.println("There is no path between " + startingNode + " to " + destination);
         } else {
             System.out.println("The path from " + startingNode + " to node " + destination + " is " + path);
+            System.out.println(map.get(destination).distance);
         }
     }
 }
