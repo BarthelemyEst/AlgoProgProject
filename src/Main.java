@@ -6,9 +6,8 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-        /* choose the graph you want to use for DFS and Dijkstra*/
 
-        String WeightedDigraph = "graph-WDG.txt";
+        String WeightedDigraph = "metro.txt";
         String DiGraph = "graph-DFS-BFS.txt";
 
 
@@ -19,19 +18,29 @@ public class Main {
         GraphFactory<String> stringGraphFactory = new StringGraphFactory();
         DiGraph diGraphString = stringGraphFactory.createDiGraphFromTextFile(DiGraph);
         WDiGraph wDiGraphString = stringGraphFactory.createWDiGraphFromTextFile(WeightedDigraph);
-        DijkstraSP<String> stringDijkstraSP = new DijkstraSP();
+        DijkstraSP stringDijkstraSP = new DijkstraSP();
 
-
+        /* Choose the nodes corresponding to your graph */
         System.out.println();
         System.out.println("Dijkstra : ");
         System.out.println();
 
+        Long starttime = System.nanoTime();
+        stringDijkstraSP.DijkstraSP(wDiGraphString, "0");
+        stringDijkstraSP.shortestPath("5");
+        stringDijkstraSP.distTo("5");
+        Long endtime = System.nanoTime();
+        System.out.println("Dijkstra Execution Time : " + (endtime - starttime));
 
-        /* Choose the nodes corresponding to your graph */
 
-        stringDijkstraSP.DijkstraSP(wDiGraphString, "1");
-        stringDijkstraSP.shortestPath("7");
-        stringDijkstraSP.distTo("7");
+        starttime = System.nanoTime();
+        BellmanFord bellmanFord = new BellmanFord<>(wDiGraphString, "0");
+        System.out.println("BellmanFord : ");
+        bellmanFord.printSP("5");
+        endtime = System.nanoTime();
+        System.out.println("BellmanFord Execution Time : " + (endtime - starttime));
+        System.out.println();
+
 
         System.out.println();
         System.out.println("DFS : ");
@@ -55,18 +64,20 @@ public class Main {
 
         System.out.println("Here, everything works with Integers : ");
 
+        WeightedDigraph = "metro.txt";
+
         GraphFactory<Integer> integerGraphFactory = new IntegerGraphFactory();
         DiGraph diGraphInteger = integerGraphFactory.createDiGraphFromTextFile(DiGraph);
         WDiGraph wDiGraphInteger = integerGraphFactory.createWDiGraphFromTextFile(WeightedDigraph);
-        DijkstraSP<Integer> integerDijkstraSP = new DijkstraSP<>();
+        DijkstraSP integerDijkstraSP = new DijkstraSP<>();
 
         System.out.println();
         System.out.println("Dijkstra : ");
         System.out.println();
 
-        integerDijkstraSP.DijkstraSP(wDiGraphInteger, 1);
-        integerDijkstraSP.shortestPath(5);
-        integerDijkstraSP.distTo(5);
+        integerDijkstraSP.DijkstraSP(wDiGraphInteger, 7);
+        integerDijkstraSP.shortestPath(1);
+        integerDijkstraSP.distTo(1);
 
         System.out.println();
         System.out.println("DFS : ");
